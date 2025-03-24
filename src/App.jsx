@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import './App.css'
 
@@ -10,6 +10,10 @@ function App() {
   const [forecastData, setForecastData] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(images/aa72913855f9e02a949a5c392b48299e.jpg)`
+  }, [])
 
   const getWeatherIcon = (main) => {
     const icons = {
@@ -65,7 +69,7 @@ function App() {
 
       const todayDate = new Date().toISOString().split('T')[0]
       const filteredForecasts = forecastResult.list
-        .filter(item => 
+        .filter(item =>
           item.dt_txt.includes('12:00:00') && !item.dt_txt.includes(todayDate)
         )
         .slice(0, 6)
